@@ -1,0 +1,23 @@
+name: Lint Charts
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Run linter
+        run: python file_linter.py ./my_chart rules.yaml --output-format=xml
+      - name: Upload Test Results
+        uses: actions/upload-artifact@v2
+        with:
+          name: junit-report
+          path: report.xml
