@@ -1,0 +1,16 @@
+
+rules:
+  - id: "no-root-user"
+    description: "Проверяет, что контейнер не запускается под root пользователем"
+    severity: "high"
+    regexp: "securityContext:\s*runAsUser:\s*0"
+  
+  - id: "resources-limits"
+    description: "Убедитесь, что заданы лимиты ресурсов"
+    severity: "medium"
+    regexp: "resources:\s*limits:"
+    
+  - id: "image-tag-not-latest"
+    description: "Проверяет, что теги изображений не являются 'latest'"
+    severity: "low"
+    regexp: "image:\s.*:(?!latest\b)\S+"
