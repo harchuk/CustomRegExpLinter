@@ -1,0 +1,11 @@
+stages:
+  - lint
+
+linting:
+  stage: lint
+  script:
+    - python file_linter.py ./my_chart rules.yaml --verbose --fail-on-severity=high
+  artifacts:
+    when: always
+    reports:
+      junit: report.xml
